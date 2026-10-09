@@ -548,12 +548,21 @@ a:focus-visible {
   }
 }
 
-/* ---------- Tablet y escritorio ---------- */
+/* ---------- Pantallas más anchas ----------
+   Los estilos base de arriba son los del celular y no se tocan aquí.
+   Rangos (cada uno hereda del anterior):
+   · tablet ............ 720–1023 px
+   · laptop ............ 1024–1439 px
+   · pantalla grande ... 1440 px en adelante
+   Dentro de cada rango, clamp() hace que tamaños y espacios crezcan
+   poco a poco en vez de saltar. Al final va el celular en horizontal. */
+
+/* ---------- Tablet (720 px en adelante) ---------- */
 
 @media (min-width: 720px) {
   :root {
-    --aire: 88px;
-    --margen: 40px;
+    --aire: clamp(80px, 8vw, 128px);
+    --margen: clamp(40px, 5vw, 80px);
   }
 
   .columna {
@@ -564,13 +573,28 @@ a:focus-visible {
     max-width: 880px;
   }
 
+  .etiqueta {
+    font-size: 13px;
+  }
+
+  .titulo {
+    font-size: clamp(48px, 2.5vw + 30px, 64px);
+  }
+
+  .texto {
+    font-size: clamp(17px, 0.3vw + 15px, 19px);
+  }
+
+  /* Portada */
+
   .hero {
+    --arco-ancho: 320px;
     padding-top: 88px;
     padding-bottom: 80px;
   }
 
   .hero__nombre {
-    font-size: 120px;
+    font-size: clamp(112px, 14vw, 136px);
   }
 
   .hero__apellidos {
@@ -585,16 +609,6 @@ a:focus-visible {
     width: 64px;
   }
 
-  .arco {
-    border-radius: 172px 172px 12px 12px;
-  }
-
-  .arco__interior {
-    width: 320px;
-    height: 410px;
-    border-radius: 164px 164px 4px 4px;
-  }
-
   .hero__hora {
     font-size: 18px;
   }
@@ -603,52 +617,25 @@ a:focus-visible {
     font-size: 16px;
   }
 
-  .etiqueta {
-    font-size: 13px;
-  }
-
-  .titulo {
-    font-size: 52px;
-  }
-
-  .texto {
-    font-size: 17px;
-  }
+  /* Mensaje: el ancho se mide en em para no pasar de ~60 caracteres por línea */
 
   .mensaje__principal {
-    font-size: 32px;
+    max-width: 22em;
+    font-size: clamp(30px, 1vw + 23px, 38px);
   }
+
+  /* Papás y padrinos: en tablet siguen uno sobre otro (en dos columnas
+     los nombres largos se partían y dejaban palabras sueltas) */
 
   .familia {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 0;
-  }
-
-  .familia > .reveal {
-    flex: 1;
-  }
-
-  .familia__divisor {
-    align-self: stretch;
-    display: flex;
-    align-items: center;
-    padding: 0 8px;
-  }
-
-  .familia__divisor .divisor {
-    flex-direction: column;
-  }
-
-  .familia__divisor .divisor__linea {
-    width: 1px;
-    height: 44px;
+    gap: 40px;
   }
 
   .familia__nombres {
     font-size: 28px;
   }
+
+  /* Cuenta regresiva */
 
   .cuenta__rejilla {
     gap: 16px;
@@ -666,22 +653,31 @@ a:focus-visible {
     font-size: 12px;
   }
 
+  .cuenta__hoy {
+    font-size: clamp(44px, 3vw + 22px, 64px);
+  }
+
+  /* Ceremonia y comida */
+
   .eventos {
     gap: 44px;
   }
 
   .eventos__rejilla {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px;
+    gap: clamp(20px, 2.5vw, 28px);
   }
 
   .tarjeta {
-    padding: 44px 36px;
+    padding: 44px clamp(20px, 3.5vw - 6px, 36px);
   }
 
   .tarjeta__titulo {
-    font-size: 32px;
+    font-size: clamp(26px, 3.6vw, 32px);
+    text-wrap: balance;
   }
+
+  /* Cierre */
 
   .cierre {
     padding-top: 96px;
@@ -694,5 +690,341 @@ a:focus-visible {
 
   .cierre__esperamos {
     font-size: 48px;
+  }
+}
+
+/* El arco toma su tamaño de --arco-ancho, que cambia según el rango. */
+@media (min-width: 720px), (min-width: 560px) and (max-height: 500px) and (orientation: landscape) {
+  .arco {
+    border-radius: calc(var(--arco-ancho) / 2 + 8px) calc(var(--arco-ancho) / 2 + 8px) 12px 12px;
+  }
+
+  .arco__interior {
+    width: var(--arco-ancho);
+    height: calc(var(--arco-ancho) * 1.28);
+    border-radius: calc(var(--arco-ancho) / 2) calc(var(--arco-ancho) / 2) 4px 4px;
+  }
+}
+
+/* Portada en dos columnas: texto a la izquierda, arco a la derecha.
+   Desde laptop y en cualquier pantalla horizontal (tablet o celular acostado).
+   Las filas vacías (1fr) de arriba y abajo centran el texto junto al arco. */
+@media (min-width: 1024px), (min-width: 720px) and (orientation: landscape), (min-width: 560px) and (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    display: flex;
+    align-items: center;
+  }
+
+  .hero__contenido {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 1fr repeat(5, auto) 1fr;
+    grid-template-areas:
+      '.        arco'
+      'concha   arco'
+      'etiqueta arco'
+      'titulo   arco'
+      'fecha    arco'
+      'resumen  arco'
+      '.        arco';
+    justify-items: center;
+    align-items: center;
+  }
+
+  .hero__concha {
+    grid-area: concha;
+  }
+
+  .hero__contenido > .etiqueta {
+    grid-area: etiqueta;
+  }
+
+  .hero__titulo {
+    grid-area: titulo;
+  }
+
+  .hero__fecha {
+    grid-area: fecha;
+  }
+
+  .arco {
+    grid-area: arco;
+    margin-top: 0;
+  }
+
+  .hero__resumen {
+    grid-area: resumen;
+  }
+}
+
+/* Portada a casi todo el alto de la pantalla (laptop y tablet en horizontal).
+   El arco se calcula con el alto visible para que en laptops de 768 px de alto
+   no se recorte, y con el ancho para que no le gane al nombre. El tope de 75vw
+   evita una portada casi vacía en pantallas verticales de 1024 px o más. */
+@media (min-width: 1024px), (min-width: 720px) and (orientation: landscape) {
+  .hero {
+    --arco-ancho: clamp(240px, min(calc((100svh - 240px) / 1.28), 34vw), 400px);
+    min-height: min(94svh, 1040px, 75vw);
+    padding-top: clamp(40px, 8svh, 96px);
+    padding-bottom: clamp(40px, 8svh, 96px);
+  }
+
+  .hero__contenido {
+    max-width: 1040px;
+    column-gap: clamp(40px, 5vw, 96px);
+  }
+
+  .hero__resumen {
+    margin-top: 12px;
+  }
+}
+
+/* ---------- Laptop (1024 px en adelante) ---------- */
+
+@media (min-width: 1024px) {
+  .hero__nombre {
+    font-size: clamp(128px, 10vw + 24px, 176px);
+  }
+
+  /* Mensaje */
+
+  .mensaje {
+    max-width: 880px;
+    gap: 28px;
+  }
+
+  /* Papás y padrinos: dos columnas con divisor vertical */
+
+  .familia {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .familia > .reveal {
+    flex: 1;
+  }
+
+  .familia__divisor {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    padding: 0 clamp(16px, 2.5vw, 40px);
+  }
+
+  .familia__divisor .divisor {
+    flex-direction: column;
+  }
+
+  .familia__divisor .divisor__linea {
+    width: 1px;
+    height: 48px;
+  }
+
+  .familia__grupo {
+    gap: 20px;
+  }
+
+  .familia__nombres {
+    gap: 12px;
+    font-size: clamp(28px, 0.6vw + 22px, 34px);
+    text-wrap: balance;
+  }
+
+  /* Cuenta regresiva */
+
+  .cuenta {
+    max-width: 720px;
+    gap: 32px;
+  }
+
+  .cuenta__rejilla {
+    gap: clamp(16px, 1.6vw, 24px);
+  }
+
+  .cuenta__celda {
+    gap: 10px;
+    padding: clamp(24px, 2.4vw, 36px) 0;
+    border-radius: 12px;
+  }
+
+  .cuenta__numero {
+    font-size: clamp(56px, 3vw + 26px, 80px);
+  }
+
+  .cuenta__nombre {
+    font-size: 13px;
+  }
+
+  /* Ceremonia y comida */
+
+  .eventos {
+    gap: 56px;
+  }
+
+  .tarjeta {
+    gap: 16px;
+    padding: 48px 40px;
+  }
+
+  .tarjeta__titulo {
+    font-size: clamp(32px, 0.6vw + 26px, 38px);
+  }
+
+  .tarjeta__hora {
+    font-size: 18px;
+  }
+
+  /* Cierre: "guarda la fecha" y despedida lado a lado, separados por el
+     divisor en vertical, para que la franja oscura no se vea vacía. */
+
+  .cierre {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    padding-top: clamp(96px, 9vw, 144px);
+    padding-bottom: clamp(96px, 9vw, 144px);
+    padding-left: max(var(--margen), calc((100% - 1040px) / 2));
+    padding-right: max(var(--margen), calc((100% - 1040px) / 2));
+  }
+
+  .cierre__contenido,
+  .cierre__despedida {
+    max-width: none;
+    margin: 0;
+    padding: 0 clamp(16px, 2vw, 40px);
+  }
+
+  /* más chico que los otros títulos para que la fecha quepa en una línea */
+  .cierre__contenido .titulo {
+    font-size: clamp(48px, 2vw + 30px, 60px);
+    text-wrap: balance;
+  }
+
+  .cierre__despedida {
+    position: relative;
+    align-self: stretch;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .cierre__despedida .divisor {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+  }
+
+  .cierre__despedida .divisor__linea {
+    width: 1px;
+    height: clamp(64px, 7vw, 104px);
+  }
+
+  .cierre__esperamos {
+    font-size: clamp(56px, 3vw + 26px, 72px);
+  }
+
+  .cierre__familia {
+    font-size: 14px;
+  }
+}
+
+/* ---------- Pantalla grande (1440 px en adelante) ---------- */
+
+@media (min-width: 1440px) {
+  .columna--ancha {
+    max-width: 1040px;
+  }
+
+  .etiqueta {
+    font-size: 14px;
+  }
+
+  .hero {
+    --arco-ancho: clamp(272px, min(calc((100svh - 260px) / 1.28), 32vw), 440px);
+  }
+
+  .hero__contenido {
+    max-width: 1160px;
+  }
+
+  .hero__apellidos {
+    font-size: 20px;
+  }
+
+  .hero__fecha {
+    font-size: 26px;
+  }
+
+  .hero__fecha-linea {
+    width: 80px;
+  }
+
+  .hero__hora {
+    font-size: 20px;
+  }
+
+  .hero__lugar {
+    font-size: 17px;
+  }
+
+  .cuenta {
+    max-width: 800px;
+  }
+
+  .tarjeta {
+    padding: 56px 48px;
+  }
+
+  .cierre {
+    padding-left: max(var(--margen), calc((100% - 1160px) / 2));
+    padding-right: max(var(--margen), calc((100% - 1160px) / 2));
+  }
+}
+
+/* ---------- Celular en horizontal (poco alto) ----------
+   Va al final para ganarle a los rangos anteriores: la portada en dos
+   columnas se ajusta al alto visible en lugar de ocupar dos pantallas. */
+
+@media (min-width: 560px) and (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    --arco-ancho: clamp(150px, calc((100svh - 80px) / 1.28), 300px);
+    min-height: 100svh;
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  .hero__contenido {
+    max-width: 880px;
+    row-gap: 10px;
+    column-gap: 32px;
+  }
+
+  .hero__concha svg {
+    width: 48px;
+    height: auto;
+  }
+
+  .hero__nombre {
+    font-size: clamp(64px, 22svh, 112px);
+  }
+
+  .hero__apellidos {
+    font-size: 15px;
+  }
+
+  .hero__fecha {
+    font-size: 20px;
+  }
+
+  .hero__fecha-linea {
+    width: 36px;
+  }
+
+  .hero__resumen {
+    margin-top: 4px;
   }
 }
