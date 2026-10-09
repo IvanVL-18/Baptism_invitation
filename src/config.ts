@@ -7,7 +7,7 @@ export type Evento = {
   titulo: string
   lugar: string
   hora: string
-  /** Texto que se busca en Google Maps al tocar "Cómo llegar". */
+  /** Dirección o coordenadas ("lat,lng") que se buscan en Google Maps al tocar "Cómo llegar". */
   mapa: string
 }
 
@@ -53,10 +53,11 @@ export const invitacion = {
     {
       icono: 'comida',
       tipo: 'Comida',
-      titulo: 'Nacionalismo #200',
+      titulo: 'Nacionalismo #64',
       lugar: 'Jagüey de Téllez, Zempoala, Hidalgo',
       hora: 'Después de la misa',
-      mapa: 'Nacionalismo 200, Jagüey de Téllez, Zempoala, Hidalgo',
+      // Coordenadas del pin compartido: https://maps.app.goo.gl/1WxmGsXLNpBe6Egx7
+      mapa: '19.983564,-98.790210',
     },
   ] as Evento[],
 
@@ -69,7 +70,7 @@ export const invitacion = {
   calendario: {
     titulo: 'Bautizo de Álvaro',
     lugar: 'Iglesia de la Asunción, Pachuca, Hidalgo',
-    detalles: 'Misa a las 12:00 h. Después, comida en Nacionalismo #200, Jagüey de Téllez, Zempoala, Hidalgo.',
+    detalles: 'Misa a las 12:00 h. Después, comida en Nacionalismo #64, Jagüey de Téllez, Zempoala, Hidalgo.',
     /** Archivo en /public para Apple Calendar y Outlook. */
     archivoICS: 'bautizo-alvaro.ics',
   },
