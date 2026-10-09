@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bautizo Alvaro//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:bautizo-alvaro-20261024@invitacion
+DTSTAMP:20261009T000000Z
+DTSTART:20261024T180000Z
+DTEND:20261024T190000Z
+SUMMARY:Bautizo de Álvaro
+LOCATION:Iglesia de la Asunción\, Pachuca\, Hidalgo
+DESCRIPTION:Misa a las 12:00 h. Después\, comida en Nacionalismo #200\, Jagüey de Téllez\, Zempoala\, Hidalgo.
+END:VEVENT
+END:VCALENDAR

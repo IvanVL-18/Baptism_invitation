@@ -1,0 +1,698 @@
+/* Diseño A · Cielo. Móvil primero: los estilos base son para celular
+   y los @media de abajo agrandan y reacomodan en pantallas más anchas. */
+
+:root {
+  --fondo: #f4f7fa;
+  --papel: #ffffff;
+  --tinte: #e6edf5;
+  --tinte-fuerte: #dce6f1;
+  --tinta: #1e2f4a;
+  --tinta-suave: #3d4f6b;
+  --acento: #4a6fa5;
+  --acento-oscuro: #3d5d8c;
+  --dorado: #b29a62;
+  --dorado-claro: #d9c79a;
+  --linea: #c9d6e5;
+
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans: 'Jost', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --margen: 28px;
+  --aire: 56px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--tinta);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ---------- Estructura ---------- */
+
+.seccion {
+  padding: var(--aire) var(--margen);
+  background: var(--fondo);
+}
+
+.seccion--papel {
+  background: var(--papel);
+}
+
+.seccion--tinte {
+  background: var(--tinte);
+}
+
+.seccion--noche {
+  background: var(--tinta);
+  color: var(--fondo);
+}
+
+.columna {
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ---------- Tipografía compartida ---------- */
+
+.etiqueta {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--acento);
+}
+
+.etiqueta--dorada {
+  color: var(--dorado-claro);
+}
+
+.titulo {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 1.1;
+}
+
+.titulo--claro {
+  color: #ffffff;
+  font-size: 40px;
+}
+
+.texto {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--tinta-suave);
+}
+
+.texto--claro {
+  color: var(--tinte-fuerte);
+}
+
+.ornamento {
+  display: inline-flex;
+  color: var(--dorado);
+}
+
+.divisor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--dorado);
+}
+
+.divisor__linea {
+  width: 56px;
+  height: 1px;
+  background: currentColor;
+}
+
+.divisor__rombo {
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  transform: rotate(45deg);
+}
+
+/* ---------- Botones ---------- */
+
+.boton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 26px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.boton:active {
+  transform: scale(0.98);
+}
+
+.boton--acento {
+  background: var(--acento);
+  color: #ffffff;
+}
+
+.boton--acento:hover {
+  background: var(--acento-oscuro);
+}
+
+.boton--claro {
+  background: var(--fondo);
+  color: var(--tinta);
+}
+
+.boton--claro:hover {
+  background: #ffffff;
+}
+
+.enlace-claro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  font-size: 14px;
+  color: var(--tinte-fuerte);
+  text-underline-offset: 4px;
+}
+
+.enlace-claro:hover {
+  color: #ffffff;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--dorado);
+  outline-offset: 3px;
+}
+
+/* ---------- Portada ---------- */
+
+.hero {
+  padding-top: 56px;
+  padding-bottom: 48px;
+}
+
+.hero__contenido {
+  gap: 20px;
+}
+
+.hero__concha {
+  color: var(--dorado);
+  line-height: 0;
+}
+
+.hero__titulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-weight: 400;
+}
+
+.hero__nombre {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(72px, 22vw, 84px);
+  line-height: 1;
+}
+
+.hero__apellidos {
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  /* compensa el espacio que deja el tracking después de la última letra */
+  margin-right: -0.3em;
+}
+
+.hero__fecha {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.hero__fecha-linea {
+  width: 36px;
+  height: 1px;
+  background: var(--dorado);
+}
+
+.arco {
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid var(--dorado);
+  border-radius: 132px 132px 10px 10px;
+}
+
+.arco__interior {
+  width: 240px;
+  height: 310px;
+  border-radius: 124px 124px 4px 4px;
+  background: var(--tinte-fuerte);
+  color: var(--dorado);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.arco__interior img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero__resumen {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero__hora {
+  font-size: 16px;
+}
+
+.hero__lugar {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--tinta-suave);
+}
+
+/* ---------- Mensaje ---------- */
+
+.mensaje {
+  gap: 24px;
+}
+
+.mensaje__principal {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+/* ---------- Papás y padrinos ---------- */
+
+.familia {
+  gap: 36px;
+}
+
+.familia__grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.familia__nombres {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+/* ---------- Cuenta regresiva ---------- */
+
+.cuenta {
+  gap: 24px;
+}
+
+.cuenta__rejilla {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.cuenta__celda {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 0;
+  background: var(--papel);
+  border-radius: 10px;
+}
+
+.cuenta__numero {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.cuenta__nombre {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-right: -0.18em;
+  color: var(--tinta-suave);
+}
+
+.cuenta__hoy {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 34px;
+}
+
+/* ---------- Ceremonia y comida ---------- */
+
+.eventos {
+  gap: 28px;
+  align-items: stretch;
+}
+
+.eventos__encabezado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.eventos__rejilla {
+  display: grid;
+  gap: 20px;
+}
+
+.eventos__item {
+  display: flex;
+}
+
+.tarjeta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 32px 24px;
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+}
+
+.tarjeta__icono {
+  display: inline-flex;
+  color: var(--acento);
+}
+
+.tarjeta__tipo {
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-right: -0.28em;
+  color: var(--tinta-suave);
+}
+
+.tarjeta__titulo {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.15;
+}
+
+.tarjeta__hora {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.tarjeta .boton {
+  margin-top: auto;
+}
+
+.tarjeta__hora + .boton {
+  /* separa el botón sin perder el empuje hacia abajo en tarjetas de distinta altura */
+  position: relative;
+  top: 8px;
+  margin-bottom: 8px;
+}
+
+/* ---------- Cierre ---------- */
+
+.cierre {
+  padding-top: 64px;
+  padding-bottom: 72px;
+}
+
+.cierre__contenido {
+  gap: 22px;
+}
+
+.cierre__acciones {
+  width: 100%;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.cierre__despedida {
+  margin-top: 48px;
+  gap: 22px;
+}
+
+.cierre__despedida .divisor {
+  color: var(--dorado-claro);
+}
+
+.cierre__esperamos {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.cierre__familia {
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-right: -0.3em;
+  color: var(--tinte-fuerte);
+}
+
+/* ---------- Animaciones ---------- */
+
+.entrada {
+  animation: entrada 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes entrada {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entrada {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .boton {
+    transition: none;
+  }
+}
+
+/* ---------- Tablet y escritorio ---------- */
+
+@media (min-width: 720px) {
+  :root {
+    --aire: 88px;
+    --margen: 40px;
+  }
+
+  .columna {
+    max-width: 560px;
+  }
+
+  .columna--ancha {
+    max-width: 880px;
+  }
+
+  .hero {
+    padding-top: 88px;
+    padding-bottom: 80px;
+  }
+
+  .hero__nombre {
+    font-size: 120px;
+  }
+
+  .hero__apellidos {
+    font-size: 18px;
+  }
+
+  .hero__fecha {
+    font-size: 24px;
+  }
+
+  .hero__fecha-linea {
+    width: 64px;
+  }
+
+  .arco {
+    border-radius: 172px 172px 12px 12px;
+  }
+
+  .arco__interior {
+    width: 320px;
+    height: 410px;
+    border-radius: 164px 164px 4px 4px;
+  }
+
+  .hero__hora {
+    font-size: 18px;
+  }
+
+  .hero__lugar {
+    font-size: 16px;
+  }
+
+  .etiqueta {
+    font-size: 13px;
+  }
+
+  .titulo {
+    font-size: 52px;
+  }
+
+  .texto {
+    font-size: 17px;
+  }
+
+  .mensaje__principal {
+    font-size: 32px;
+  }
+
+  .familia {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .familia > .reveal {
+    flex: 1;
+  }
+
+  .familia__divisor {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+  }
+
+  .familia__divisor .divisor {
+    flex-direction: column;
+  }
+
+  .familia__divisor .divisor__linea {
+    width: 1px;
+    height: 44px;
+  }
+
+  .familia__nombres {
+    font-size: 28px;
+  }
+
+  .cuenta__rejilla {
+    gap: 16px;
+  }
+
+  .cuenta__celda {
+    padding: 24px 0;
+  }
+
+  .cuenta__numero {
+    font-size: 56px;
+  }
+
+  .cuenta__nombre {
+    font-size: 12px;
+  }
+
+  .eventos {
+    gap: 44px;
+  }
+
+  .eventos__rejilla {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  .tarjeta {
+    padding: 44px 36px;
+  }
+
+  .tarjeta__titulo {
+    font-size: 32px;
+  }
+
+  .cierre {
+    padding-top: 96px;
+    padding-bottom: 104px;
+  }
+
+  .cierre__acciones {
+    max-width: 360px;
+  }
+
+  .cierre__esperamos {
+    font-size: 48px;
+  }
+}

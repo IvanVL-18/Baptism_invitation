@@ -1,0 +1,39 @@
+<!doctype html>
+<!-- Plantilla de la imagen que aparece al compartir el link (public/og.jpg, 1200x630).
+     Si cambian los datos, edita el texto, ábrela en el navegador con el proyecto
+     instalado y toma una captura de 1200x630. -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../node_modules/@fontsource/cormorant-garamond/latin-500.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/cormorant-garamond/latin-500-italic.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/jost/latin-400.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/jost/latin-500.css">
+<style>
+  body { margin: 0; }
+  .lienzo { width: 1200px; height: 630px; box-sizing: border-box; padding: 22px; background: #F4F7FA; color: #1E2F4A; font-family: 'Jost', sans-serif; }
+  .marco { height: 100%; box-sizing: border-box; border: 1.5px solid #B29A62; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
+  .etiqueta { font-size: 20px; font-weight: 500; letter-spacing: 0.34em; margin-right: -0.34em; text-transform: uppercase; color: #4A6FA5; }
+  .nombre { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500; font-size: 190px; line-height: 0.95; }
+  .apellidos { font-size: 28px; letter-spacing: 0.32em; margin-right: -0.32em; text-transform: uppercase; }
+  .fecha { display: flex; align-items: center; gap: 22px; margin-top: 14px; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 40px; letter-spacing: 0.06em; }
+  .linea { width: 70px; height: 1.5px; background: #B29A62; }
+  .lugar { font-size: 24px; color: #3D4F6B; }
+</style>
+</head>
+<body>
+<div class="lienzo">
+  <div class="marco">
+    <svg width="76" height="66" viewBox="0 0 64 56" fill="none" stroke="#B29A62" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 34 A26 26 0 0 1 58 34 L38 50 H26 Z"/>
+      <path d="M32 50 L12 20 M32 50 L22 11 M32 50 L32 8 M32 50 L42 11 M32 50 L52 20"/>
+    </svg>
+    <div class="etiqueta">Mi bautizo</div>
+    <div class="nombre">Álvaro</div>
+    <div class="apellidos">Islas Domínguez</div>
+    <div class="fecha"><span class="linea"></span><span>24 · Octubre · 2026</span><span class="linea"></span></div>
+    <div class="lugar">Misa 12:00 h · Iglesia de la Asunción, Pachuca, Hidalgo</div>
+  </div>
+</div>
+</body>
+</html>
