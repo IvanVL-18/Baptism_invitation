@@ -25,9 +25,11 @@ Todo el contenido está en **`src/config.ts`**: nombres, fecha, horas, lugares, 
 
 ## Imagen al compartir el link (WhatsApp)
 
-`public/og.jpg` es la imagen que aparece en la vista previa. Su plantilla está en `scripts/og.html`; si cambian los datos, edítala, ábrela en el navegador y guarda una captura de 1200 × 630 px como `public/og.jpg`.
+`public/og.jpg` es la imagen que aparece en la vista previa. Su plantilla está en `scripts/og.html`; si cambian los datos, edítala, ábrela en el navegador (con el zoom al 100 %) y guarda una captura de 1200 × 630 px como `public/og.jpg`.
 
-WhatsApp guarda la vista previa en caché: si ya compartiste el link y luego cambias la imagen, puede tardar en actualizarse.
+WhatsApp casi siempre la muestra como una miniatura cuadrada de unos 100 px, recortando el centro. Por eso la plantilla usa letra grande y deja todo dentro del cuadro central; evita agregarle texto chico, porque a ese tamaño se ve pixeleado.
+
+WhatsApp guarda la vista previa en caché: si cambias la imagen, sube el número de `?v=` en la etiqueta `og:image` de `index.html`. Para probar un link que ya compartiste, agrega algo al final, por ejemplo `.../?v=2`.
 
 ## Publicar en GitHub Pages
 
