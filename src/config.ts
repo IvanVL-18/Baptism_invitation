@@ -23,11 +23,11 @@ export const invitacion = {
   fechaLarga: 'Sábado 24 de octubre',
 
   /**
-   * Foto de portada. Deja null para mostrar el arco con el ornamento.
-   * Para usar una foto: guárdala en /public (por ejemplo public/alvaro.jpg,
-   * vertical, de unos 800 px de ancho) y escribe aquí 'alvaro.jpg'.
+   * Foto de portada (archivo dentro de /public). Para cambiarla, reemplaza
+   * public/alvaro.jpg por otra foto vertical de unos 800 px de ancho.
+   * Deja null para mostrar el arco con el ornamento.
    */
-  foto: null as string | null,
+  foto: 'alvaro.jpg' as string | null,
 
   resumen: {
     hora: 'Misa a las 12:00 h',
